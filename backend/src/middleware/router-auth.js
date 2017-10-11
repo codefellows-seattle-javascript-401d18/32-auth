@@ -9,6 +9,7 @@ import {log, daysToMilliseconds} from '../lib/util.js'
 export default new Router()
 .post('/signup', parserBody, (req, res, next) => {
   log('__ROUTE__ POST /signup')
+  console.log('hit post signup:', req.body);
   new User.create(req.body)
   .then(user => user.tokenCreate())
   .then(token => {

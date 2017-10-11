@@ -9,20 +9,24 @@ import {log, logError} from './util.js'
 // STATE
 const app = express().use(middleware)
 const state = {
-  isOn: false, 
+  isOn: false,
   http: null,
 }
 
-// INTERFACE 
-export const start = () => {
+// INTERFACE
+export const start = (data) => {
+  console.log('server: ', data);
   return new Promise((resolve, reject) => {
-    if (state.isOn) 
+    if (state.isOn)
       return reject(new Error('USAGE ERROR: the state is on'))
     state.isOn = true
     db.start()
-    .then(() => {
+    .then((res) => {
+      console.log('res: ', res);
       state.http = app.listen(process.env.PORT, () => {
+        console.log('server up on: ', process.env.PORT);
         log('__SERVER_UP__', process.env.PORT)
+        console.log('break2');
         resolve()
       })
     })

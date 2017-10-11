@@ -50,6 +50,7 @@ class AuthForm extends React.Component {
         {utils.renderIf(this.state.usernameError,
           <span className="tooltip">{this.state.usernameError}</span>
         )}
+
         <input
         type="username"
         name="username"

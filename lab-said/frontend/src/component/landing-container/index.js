@@ -3,38 +3,29 @@ import AuthForm from '../auth-form';
 import {connect} from 'react-redux';
 import * as utils from '../../lib/utils';
 import {signupRequest, loginRequest} from '../../action/auth-actions';
-import DashboardContainer from '../dashboard';
 
 class LandingContainer extends React.Component {
   render() {
-    console.log(this.props.auth,'hhihihihihhi');
     let {params} = this.props.match;
-    console.log(this.props);
     let handleComplete = params.auth === 'login' ?
       this.props.login :
       this.props.signup;
+
+    let redirect = path => this.props.history.replace(path);
 
     return (
       <div>
         <h2>hello world from landing!</h2>
         <AuthForm
           auth={params.auth}
+          redirect={redirect}
           onComplete={handleComplete}/>
-
-        <section>
-          {utils.renderIf(this.props.auth,
-            <DashboardContainer
-            />
-          )}
-        </section>
       </div>
     );
   }
 }
 
-let mapStateToProps = (state) => ({
-  auth: state.auth,
-});
+let mapStateToProps = () => ({});
 let mapDispatchToProps = dispatch => ({
   signup: user => dispatch(signupRequest(user)),
   login: user => dispatch(loginRequest(user)),

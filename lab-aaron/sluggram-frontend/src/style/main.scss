@@ -4,14 +4,16 @@
 // #9099A2 -Overcast -grey
 // #D5D5D5 -Paper -whiteish
 
-$white: #D5D5D5;
-$black: #9099A2;
-$primary: #96858F;
-$secondary: #6D7993;
-$font-primary: 'arial';
-$gutter-sm: 1.5vw;
-$gutter-lg: $gutter-sm * 2;
-$border-radius: 5px;
+//transferred to the _vars.scss library, not sure if it auto imports<fingers crossed>dont have enough in to test
+
+// $white: #D5D5D5;
+// $black: #9099A2;
+// $primary: #96858F;
+// $secondary: #6D7993;
+// $font-primary: 'arial';
+// $gutter-sm: 1.5vw;
+// $gutter-lg: $gutter-sm * 2;
+// $border-radius: 5px;
 
 body {
   font-family: $font-primary;

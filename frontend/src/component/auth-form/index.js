@@ -65,6 +65,13 @@ class AuthForm extends React.Component {
           value={this.state.password}
           onChange = {this.handleChange}/>
 
+          <input
+            type="username"
+            name="username"
+            placeholder="username"
+            value={this.state.username}
+            onChange = {this.handleChange}/>
+
         <button type = "submit">{this.props.auth}</button>
       </form>
     );

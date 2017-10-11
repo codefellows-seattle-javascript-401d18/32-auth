@@ -3,7 +3,7 @@ import AuthForm from '../auth-form';
 import {connect} from 'react-redux';
 import * as utils from '../../lib/utils';
 import {signupRequest, loginRequest} from '../../action/auth-actions';
-import Dashboard from './dashboard';
+import Dashboard from '../dashboard';
 
 class LandingContainer extends React.Component {
   render() {
@@ -21,6 +21,7 @@ class LandingContainer extends React.Component {
           onComplete={handleComplete}/>
 
         <div>
+        //explained by Gavin this afternoon
         {utils.renderIf(this.props.auth,
           <Dashboard />
         )}

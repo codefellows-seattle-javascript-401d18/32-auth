@@ -52,6 +52,13 @@ class AuthForm extends React.Component {
         )}
 
         <input
+          type="email"
+          name="email"
+          placeholder="email"
+          value={this.state.email}
+          onChange = {this.handleChange}/>
+
+        <input
           type="password"
           name="password"
           placeholder="password"
@@ -64,4 +71,4 @@ class AuthForm extends React.Component {
   }
 }
 
-export default AuthForm; 
+export default AuthForm;

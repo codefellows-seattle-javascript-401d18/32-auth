@@ -16,13 +16,12 @@ class LandingContainer extends React.Component {
     return (
       <div>
         <h2>hello world from landing woooooo!</h2>
-        <AuthForm
-          auth={params.auth}
-          onComplete={handleComplete}/>
+        // <AuthForm/>
+          // auth={params.auth}
+          // onComplete={handleComplete}/>
 
         <div>
-        //explained by Gavin this afternoon
-        {utils.renderIf(this.props.auth,
+        // {utils.renderIf(this.props.auth,
           <Dashboard />
         )}
         </div>

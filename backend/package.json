@@ -6,19 +6,31 @@
   "author": "Duncan Marsh <dwolfm@gmail.com>",
   "license": "MIT",
   "jest": {
+    "verbose": true,
+    "testEnvironment": "node",
     "setupFiles": [
       "<rootDir>/src/__test__/lib/test.env.js",
       "<rootDir>/src/__test__/lib/mock-s3.js"
-    ]
+    ],
+    "collectCoverage": true,
+    "coverageDirectory": "./coverage",
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "functions": 80,
+        "lines": 80,
+        "statements": 80
+      }
+    }
   },
   "scripts": {
-    "lint": "eslint .",
     "start": "node index.js",
-    "watch": "nodemon index.js",
+    "start:watch": "nodemon index.js",
+    "start:debug": "DEBUG=http* nodemon index.js",
     "test": "jest --runInBand",
-    "test-watch": "jest --runInBand --watchAll",
-    "dbon": "mkdir -p ./db && mongod --dbpath ./db",
-    "dboff": "killall mongod"
+    "test:watch": "jest --watchAll",
+    "lint": "eslint .",
+    "lint:test": "npm run lint && npm test"
   },
   "dependencies": {
     "aws-sdk": "^2.92.0",

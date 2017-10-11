@@ -4,6 +4,7 @@ import {Provider} from 'react-redux';
 import LandingContainer from '../landing-container';
 import {BrowserRouter, Route} from 'react-router-dom';
 import appStoreCreate from '../../lib/app-create-store';
+import DashboardContainer from '../dashboard-container';
 
 let store = appStoreCreate();
 

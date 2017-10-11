@@ -3,6 +3,7 @@ import AuthForm from '../auth-form';
 import {connect} from 'react-redux';
 import * as utils from '../../lib/utils';
 import {signupRequest, loginRequest} from '../../action/auth-actions';
+import Dashboard from './dashboard';
 
 class LandingContainer extends React.Component {
   render() {
@@ -18,6 +19,12 @@ class LandingContainer extends React.Component {
         <AuthForm
           auth={params.auth}
           onComplete={handleComplete}/>
+
+        <div>
+        {utils.renderIf(this.props.auth,
+          <Dashboard />
+        )}
+        </div>
       </div>
     );
   }

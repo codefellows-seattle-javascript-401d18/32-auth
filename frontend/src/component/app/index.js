@@ -15,7 +15,8 @@ class App extends React.Component {
           <BrowserRouter>
             <div>
               <Navbar />
-                {<Route path="/welcome/:auth" component={LandingContainer}/>}
+                <Route path="/welcome/:auth" component={LandingContainer}/>
+                <Route exact path='/dashboard' component={DashboardContainer}/>
             </div>
           </BrowserRouter>
         </Provider>

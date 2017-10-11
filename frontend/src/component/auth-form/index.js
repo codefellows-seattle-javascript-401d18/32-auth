@@ -34,7 +34,7 @@ class AuthForm extends React.Component {
       password: this.state.password,
       email: this.state.email,
     })
-    .then(() => this.setState({username:'', email: '', password: ''}))
+    .then(() => this.props.redirect('/dashboard'))
     .catch(error => {
       console.error(error);
       this.setState({error});
@@ -50,13 +50,16 @@ class AuthForm extends React.Component {
         {utils.renderIf(this.state.usernameError,
           <span className="tooltip">{this.state.usernameError}</span>
         )}
-
         <input
-          type="email"
-          name="email"
-          placeholder="email"
-          value={this.state.email}
-          onChange = {this.handleChange}/>
+        type="username"
+        name="username"
+        placeholder="username"
+        value={this.state.username}
+        onChange = {this.handleChange}/>
+
+        {utils.renderIf(this.state.passwordError,
+          <span className="tooltip">{this.state.passwordError}</span>
+        )}
 
         <input
           type="password"
@@ -65,12 +68,16 @@ class AuthForm extends React.Component {
           value={this.state.password}
           onChange = {this.handleChange}/>
 
+          {utils.renderIf(this.state.emailError,
+            <span className="tooltip">{this.state.emailError}</span>
+          )}
+
           <input
-            type="username"
-            name="username"
-            placeholder="username"
-            value={this.state.username}
-            onChange = {this.handleChange}/>
+          type="email"
+          name="email"
+          placeholder="email"
+          value={this.state.email}
+          onChange = {this.handleChange}/>
 
         <button type = "submit">{this.props.auth}</button>
       </form>

@@ -4,7 +4,8 @@
 @import './layout/header';
 @import './layout/content';
 @import './layout/footer';
-@import './component/app';
-@import './component/auth-form';
-@import './component/landing-container';
-@import './component/navbar';
+@import '../component/app/app';
+@import '../component/auth-form/auth-form';
+@import '../component/landing-container/landing-container';
+@import '../component/dashboard/dashboard';
+@import '../component/navbar/navbar';

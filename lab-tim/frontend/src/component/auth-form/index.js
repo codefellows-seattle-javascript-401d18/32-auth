@@ -1,4 +1,5 @@
 import React from 'react';
+import {browserHistory} from 'react-router';
 import * as utils from '../../lib/utils';
 
 class AuthForm extends React.Component {
@@ -15,6 +16,16 @@ class AuthForm extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    if (this.props.token) {
+      let redirectToDashboard = () => {
+        browserHistory.push('/dashboard');
+      };
+
+      redirectToDashboard();
+    }
   }
 
   handleChange(e) {

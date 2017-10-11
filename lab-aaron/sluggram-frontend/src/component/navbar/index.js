@@ -11,7 +11,11 @@ class Navbar extends React.Component {
         <nav>
           <ul>
             {this.props.auth ?
-              <li onClick={this.props.tokenDelete}><Link to="/">Logout</Link></li> :
+              <div>
+                <li onClick={this.props.tokenDelete}><Link to="/">Logout</Link></li>
+                <li><Link to="/dashboard">Dashboard</Link></li>
+              </div>
+              :
               <div>
                 <li><Link to="/welcome/signup">Signup</Link></li>
                 <li><Link to="/welcome/login">Login</Link></li>
@@ -22,7 +26,7 @@ class Navbar extends React.Component {
       </header>
     );
   }
-}//nope
+}
 
 let mapStateToProps = state => ({
   auth: state.auth,

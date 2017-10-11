@@ -34,7 +34,7 @@ class AuthForm extends React.Component {
       password: this.state.password,
       email: this.state.email,
     })
-      .then(() => this.setState({username: '', email: '', password: ''}))
+      .then(() => this.props.redirect('/dashboard'))
       .catch(error => {
         console.error(error);
         this.setState({error});
@@ -86,7 +86,6 @@ class AuthForm extends React.Component {
       </form>
     );
   }
-
 }
 
 export default AuthForm;

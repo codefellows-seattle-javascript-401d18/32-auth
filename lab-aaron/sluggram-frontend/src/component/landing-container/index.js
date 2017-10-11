@@ -12,11 +12,14 @@ class LandingContainer extends React.Component {
       this.props.login :
       this.props.signup;
 
+    let redirect = path => this.props.history.replace(path);
+
     return (
       <div>
         <h2>Hello from the Landing Page</h2>
         <AuthForm
           auth={params.auth}
+          redirect={redirect}
           onComplete={handleComplete}/>
       </div>
     );

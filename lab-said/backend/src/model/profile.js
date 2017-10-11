@@ -15,46 +15,46 @@ const Profile = Mongoose.model('profile', profileScheama);
 Profile.validateReqFile = function (req) {
   if(req.files.length > 1){
     return util.removeMulterFiles(req.files)
-    .then(() => {
-      throw createError(400, 'VALIDATION ERROR: only one file permited');
-    });
+      .then(() => {
+        throw createError(400, 'VALIDATION ERROR: only one file permited');
+      });
   }
 
   let [file] = req.files;
   if(file)
     if(file.fieldname !== 'avatar')
       return util.removeMulterFiles(req.files)
-    .then(() => {
-      throw createError(400, 'VALIDATION ERROR: file must be for avatar');
-    });
+        .then(() => {
+          throw createError(400, 'VALIDATION ERROR: file must be for avatar');
+        });
 
   return Promise.resolve(file);
 };
 
 Profile.createProfileWithPhoto = function(req){
   return Profile.validateReqFile(req)
-  .then((file) => {
-    return util.s3UploadMulterFileAndClean(file)
-    .then((s3Data) => {
-      return new Profile({
-        owner: req.user._id,
-        username: req.user.username,
-        email: req.user.email,
-        bio: req.body.bio,
-        avatar: s3Data.Location,
-      }).save();
+    .then((file) => {
+      return util.s3UploadMulterFileAndClean(file)
+        .then((s3Data) => {
+          return new Profile({
+            owner: req.user._id,
+            username: req.user.username,
+            email: req.user.email,
+            bio: req.body.bio,
+            avatar: s3Data.Location,
+          }).save();
+        });
     });
-  });
 };
 
 Profile.create = function(req){
   if(req.files){
     return Profile.createProfileWithPhoto(req)
-    .then(profile => {
-      req.user.profile = profile._id;
-      return req.user.save()
-      .then(() => profile);
-    });
+      .then(profile => {
+        req.user.profile = profile._id;
+        return req.user.save()
+          .then(() => profile);
+      });
   }
 
   return new Profile({
@@ -63,35 +63,35 @@ Profile.create = function(req){
     email: req.user.email,
     bio: req.body.bio,
   })
-  .save()
-  .then(profile => {
-    req.user.profile = profile._id;
-    return req.user.save()
-    .then(() => profile);
-  });
+    .save()
+    .then(profile => {
+      req.user.profile = profile._id;
+      return req.user.save()
+        .then(() => profile);
+    });
 };
 
 Profile.fetch = util.pagerCreate(Profile);
 
 Profile.fetchOne = function(req){
   return Profile.findById(req.params.id)
-  .then(profile => {
-    if(!profile)
-      throw createError(404, 'NOT FOUND ERROR: profile not found');
-    return profile;
-  });
+    .then(profile => {
+      if(!profile)
+        throw createError(404, 'NOT FOUND ERROR: profile not found');
+      return profile;
+    });
 };
 
 Profile.updateProfileWithPhoto = function(req) {
   return Profile.validateReqFile(req)
-  .then(file => {
-    return util.s3UploadMulterFileAndClean(file)
-    .then((s3Data) => {
-      let update = {avatar: s3Data.Location};
-      if(req.body.bio) update.bio = req.body.bio;
-      return Profile.findByIdAndUpdate(req.params.id, update, {new: true, runValidators: true});
+    .then(file => {
+      return util.s3UploadMulterFileAndClean(file)
+        .then((s3Data) => {
+          let update = {avatar: s3Data.Location};
+          if(req.body.bio) update.bio = req.body.bio;
+          return Profile.findByIdAndUpdate(req.params.id, update, {new: true, runValidators: true});
+        });
     });
-  });
 };
 
 Profile.update = function(req){
@@ -103,11 +103,10 @@ Profile.update = function(req){
 
 Profile.delete = function(req){
   return Profile.findOneAndRemove({_id: req.params.id, owner: req.user._id})
-  .then(profile => {
-    if(!profile)
-      throw createError(404, 'NOT FOUND ERROR: profile not found');
-    return util.s3DeletePhotoFromURL(profile.avatar);
-  });
+    .then(profile => {
+      if(!profile)
+        throw createError(404, 'NOT FOUND ERROR: profile not found');
+    });
 };
 
 export default Profile;

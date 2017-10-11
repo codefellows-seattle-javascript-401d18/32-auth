@@ -7,7 +7,7 @@ import Dashboard from '../dashboard';
 
 class LandingContainer extends React.Component {
   render() {
-    console.log(this.props.auth,'hhihihihihhi');
+    console.log(this.props.auth,'This is that thing');
     let {params} = this.props.match;
     console.log(this.props);
     let handleComplete = params.auth === 'login' ?
